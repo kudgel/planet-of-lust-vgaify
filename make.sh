@@ -6,7 +6,7 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd "$DIR"
 
 # Check MD5 of inputs (this doesn't work inline for some reason)
-bash -c 'cd inputs; diff MD5SUM <(find . -type f -print0 | xargs -0 openssl md5 | grep -v "MD5SUM" | sort) || echo Mismatched inputs'
+bash -c 'cd inputs; diff MD5SUM <(find . -type f -print0 | xargs -0 openssl md5 | grep -v "MD5SUM" | sort) || (echo Mismatched inputs && exit 1)'
 
 rm -rf out/ || true
 mkdir out
@@ -23,4 +23,4 @@ cp inputs/planlust/*.{PIQ,EXE} out/disk/
 cp out/asm/vgadetect.com out/disk/VGADET.COM
 cp scripts/PLANETOF.BAT out/disk/
 
-bash -c 'diff buildhash/1.0.MD5SUM <(find out/disk -type f | xargs openssl md5 | sort) || echo Mismatched output'
+bash -c 'diff buildhash/1.0.MD5SUM <(find out/disk -type f | xargs openssl md5 | sort) || (echo Mismatched output && exit 1)'
