@@ -39,7 +39,7 @@ ls -l1 $BASEDIR/raw/ |
 	xargs -n1 -I{} echo "pngtopnm < $BASEDIR/raw/{} | pamcut -top 0 -left 0 -right 319 -bottom 154 | pnmtopng > $BASEDIR/out/{}" |
 	sh
 # But not the title/intro files...
-cp amiga/raw/{I*,T*} $BASEDIR/out/
+cp $BASEDIR/raw/{I*,T*} $BASEDIR/out/
 # And we don't need this
 rm $BASEDIR/out/scorebar3.png
 echo `ls -l $BASEDIR/out | wc -l` files
