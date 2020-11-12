@@ -6,8 +6,8 @@ export LC_ALL=C
 
 export BASEDIR=out/amiga
 
-rm -rf $BASEDIR/{in,out,raw,colormap,vgamap,tmp} || true
-mkdir -p $BASEDIR/{in,out,raw,colormap,vgamap,tmp}
+rm -rf $BASEDIR/{in,out,raw,colormap,pcx,vgamap,tmp} || true
+mkdir -p $BASEDIR/{in,out,raw,colormap,pcx,vgamap,tmp}
 
 # Unpack Amiga images
 
@@ -85,12 +85,15 @@ echo '==================================================='
 ls -1 $BASEDIR/out/ | 
 	xargs -n1 -I{} echo 'cat $BASEDIR/out/{} | 
 	pngtopnm | 
-	ppmtopcx -8bit -palette=$BASEDIR/finalcolors.ppm | 
-	dd bs=1 skip=0x80 2>/dev/null | scripts/trim_pcx_palette.py > $BASEDIR/vgamap/`basename -s .png {}`.VIQ' | sh
+	ppmtopcx -8bit -palette=$BASEDIR/finalcolors.ppm > $BASEDIR/pcx/`basename -s .png {}`.pcx' | sh
+ls -1 $BASEDIR/pcx/ | 
+	xargs -n1 -I{} echo 'cat $BASEDIR/pcx/{} | 
+	scripts/trim_pcx.py > $BASEDIR/vgamap/`basename -s .pcx {}`.VIQ' | sh
 echo `ls -l $BASEDIR/vgamap | wc -l` images processed
 
+echo
+echo Moving output files to out/disk...
 cat $BASEDIR/finalcolors.ppm | scripts/vgapal.py > out/disk/VGA.PAL
 cp $BASEDIR/vgamap/*.VIQ out/disk/
 
-echo
 echo Done.
