@@ -1,6 +1,8 @@
 # Planet of Lust VGA Patch
 
-This patch "upgrades" the EGA version of *Planet of Lust* to a VGA one.
+This patch "upgrades" the EGA version of [*Planet of Lust*](https://www.myabandonware.com/game/planet-of-lust-qg) to a VGA one.
+
+![EGA](docimages/brad-ega.png) ![VGA](docimages/brad-vga.png) 
 
 ## Building
 
@@ -10,12 +12,16 @@ sites like archive.org or myabandonware.
 
 ## How it works
 
+The original DOS port of *Planet of Lust* created RLE-encoded EGA images using the default EGA palette. This
+was not ideal for representing the... ahem... skin tones that were common in the game. The images did not make
+use of dithering, resulting in some 
+
 The Amiga version of the game contains full-color images, conveniently in 320x200 (which is the exact same
 resolution as VGA's linear mode 13h). The palette for each image (plus the standard 16-color EGA palette)
 are combined into a new VGA palette. The code for drawing images is replaced with a PCX decoder, but we also
 add code for things like palette initialization.
 
-For some strange reason, the game hard-codes the expected sizes for each of the images it loads. We have
+For some unknown reason, the game hard-codes the expected sizes for each of the images it loads. We have
 to patch all those out with our larger images. In addition, some of the new images would overflow the
 available buffer size so that needs to be patched as well.
 
