@@ -9,6 +9,7 @@ Compare EGA vs VGA (yes, that is a real screenshot):
 
 ## Building
 
+0. Install dependencies: nasm, netpbm, xdftool (from [amitools](https://github.com/cnvogelg/amitools)), python3
 1. Populate the `inputs` directory with files that match `MD5SUM`. You might find these on 
 sites like archive.org or myabandonware.
 2. Run `make.sh`
