@@ -1,3 +1,5 @@
+BITS 16
+
 cmp al, 1ah
 jnz .no
 retf

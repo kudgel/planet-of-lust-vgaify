@@ -93,6 +93,9 @@ b = patch(b, '2E 50 49 51 00', '2E 56 49 51 00')
 # Bigger file buffer for later files
 b = patch(b, 'b8 ff 7f 50 a0 d9 5f', 'b8 00 a0 50 a0 d9 5f')
 
+# Patch the malloc buffer? (currently 0x6067 = 24679)
+# B8 67 60 50 9A 00 00 00 04 59
+
 files = ['BIGT', 'LIMP', 'P1', 'P2', 'P3', 'P4', 'P5', 'P7', 'P7_5',
          '11A', '12A', '13A', '14B', '15E', '16B', '17B', '18B',
          '19B', '20B', '21', '22', '23B', '24A', '25B', '26B', '26C',

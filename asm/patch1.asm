@@ -1,3 +1,5 @@
+BITS 16
+
 ; param1 = bitmap
 ; param2 = new ES
 ; param3 = length of bytes we're drawing
@@ -19,9 +21,9 @@ mov ax, 0xa000
 mov es, ax
 xor si, si
 dec si
-cmp byte es:[si], 0x99
+cmp byte [es:si], 0x99
 je .skippal
-mov byte es:[si], 0x99
+mov byte [es:si], 0x99
 
 ; point to VGA.PAL
 call near .getip1
@@ -69,11 +71,11 @@ rep outsb
 .skippal:
 
 ; ds:si = param
-mov ax, word ss:[bp + 8] ; param2
+mov ax, word [ss:bp + 8] ; param2
 mov ds, ax
-mov si, word ss:[bp + 6] ; param1
+mov si, word [ss:bp + 6] ; param1
 ; cx = blit size
-mov cx, word ss:[bp + 10] ; param3
+mov cx, word [ss:bp + 10] ; param3
 shl cx, 1
 
 ; es:di = a000:0000
@@ -109,9 +111,9 @@ call near .getip
 pop si
 add si, (.flag - $ + 1)
 
-cmp byte cs:[si], 0x99
+cmp byte [cs:si], 0x99
 je .skipsleep
-mov byte cs:[si], 0x99
+mov byte [cs:si], 0x99
 
 ; Sleep
 mov ax, 8600h

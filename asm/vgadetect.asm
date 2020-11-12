@@ -1,3 +1,4 @@
+BITS 16
 ORG 100h
 
 mov ax, 0x1a00

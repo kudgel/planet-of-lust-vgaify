@@ -25,7 +25,7 @@ echo `ls -l $BASEDIR/in | wc -l` images found
 echo '==================================================='
 echo ' Decode raw files'
 echo '==================================================='
-ls -l1 $BASEDIR/in/ |
+ls -1 $BASEDIR/in/ |
 	xargs -n1 -I{} echo 'scripts/decode-amiga.sh $BASEDIR/in/{} $BASEDIR/raw/`basename -s .pic {} | tr "[:lower:]." "[:upper:]_"`.png' |
 	sh
 
@@ -35,7 +35,7 @@ ls -l1 $BASEDIR/in/ |
 echo '==================================================='
 echo ' Trimming images'
 echo '==================================================='
-ls -l1 $BASEDIR/raw/ |
+ls -1 $BASEDIR/raw/ |
 	xargs -n1 -I{} echo "pngtopnm < $BASEDIR/raw/{} | pamcut -top 0 -left 0 -right 319 -bottom 154 | pnmtopng > $BASEDIR/out/{}" |
 	sh
 # But not the title/intro files...
@@ -50,7 +50,7 @@ echo `ls -l $BASEDIR/out | wc -l` files
 echo '==================================================='
 echo ' Get colormaps'
 echo '==================================================='
-ls -l1 $BASEDIR/out/ |
+ls -1 $BASEDIR/out/ |
 	xargs -n1 -I{} echo "pngtopnm $BASEDIR/out/{} | pnmcolormap all -sort > $BASEDIR/colormap/{}.ppm 2> >(grep found 1>&2)" |
 	bash
 
@@ -82,7 +82,7 @@ echo '==================================================='
 echo ' Convert to a trimmed PCX using the global colormap'
 echo '==================================================='
 # Remap to our files and move it to a PCX
-ls -l1 $BASEDIR/out/ | 
+ls -1 $BASEDIR/out/ | 
 	xargs -n1 -I{} echo 'cat $BASEDIR/out/{} | 
 	pngtopnm | 
 	ppmtopcx -8bit -palette=$BASEDIR/finalcolors.ppm | 
