@@ -40,3 +40,9 @@ VGA, so it's likely to work.
 
 Don't expect pretty code. This code is _good enough_ to get things patched, but that's it. It's a hack
 after all!
+
+## TODO
+
+The "backup buffer" the game allocates should be larger than any file we might have to load from disk,
+but at this time we haven't increased its size. This might result in random memory overwrites, especially
+on systems with lower amounts of RAM.
