@@ -46,3 +46,5 @@ after all!
 The "backup buffer" the game allocates should be larger than any file we might have to load from disk,
 but at this time we haven't increased its size. This might result in random memory overwrites, especially
 on systems with lower amounts of RAM.
+
+Use the PCX encoder from the [Sex Vixens from Space](https://github.com/kudgel/sex-vixens-vgaify) project.
